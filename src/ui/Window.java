@@ -22,78 +22,84 @@ public class Window extends Shell {
     public Window(Display display) {
         super(display, SWT.SHELL_TRIM);
         setText("Лабораторная работа 1");
-        setSize(900, 900);
+        setSize(1300, 900);
     }
 
     public void build() {
         Color backgroundColor = new Color(getDisplay(), new RGB(173, 196, 228));
-        setLayout(new GridLayout(5, false));
+        setLayout(new GridLayout(6, false));
 
-        sliderX = new SliderX(this, SWT.HORIZONTAL);
-        sliderX.setLayoutData(new GridData(SWT.NONE, SWT.NONE, false, false, 2, 1));
-        sliderX.setSize(80, 20);
-        sliderX.setMinimum(100);
-        sliderX.setMaximum(1000);
-        sliderX.setIncrement(10);
+        Label labelX = new Label(this, SWT.NONE);
+        labelX.setText("X:");
 
         textCurrentX = new Text(this, SWT.BORDER);
-        textCurrentX.setText("0");
+//        textCurrentX.setLayoutData(new GridData(SWT.NONE, SWT.NONE, false, false, 2, 1));
+//        textCurrentX.setLayoutData(new GridData(27, 20));
+        GridData dataTextX = new GridData(SWT.NONE, SWT.NONE, false, false, 2, 1);
+        dataTextX.widthHint = 27;
+        dataTextX.heightHint = 20;
+        textCurrentX.setLayoutData(dataTextX);
+        textCurrentX.setText("600");
 
+        sliderX = new SliderX(this, SWT.HORIZONTAL);
+        sliderX.setLayoutData(new GridData(SWT.FILL, SWT.NONE, false, false, 3, 1));
+        sliderX.setSize(80, 20);
+        sliderX.setMinimum(50);
+        sliderX.setMaximum(1200);
+        sliderX.setIncrement(10);
+        sliderX.setSelection(600);
 
-//        sliderX.addSelectionListener(new SelectionAdapter() {
-//            public void widgetSelected(SelectionEvent e) {
-//                textCurrentX.setText(new Integer(sliderX.getSelection()).toString());
-//                model.changeTriangle(new Point(sliderX.getSelection(), 300), sliderX.getSelection());
-//                drawManager.updateTriangle();
-//            }
-//        });
-
-
-        sliderAngle = new SliderAngle(this, SWT.HORIZONTAL);
-//        final Slider sliderAngle = new Slider(this, SWT.HORIZONTAL);
-        sliderAngle.setSize(60, 20);
-        sliderAngle.setMinimum(0);
-        sliderAngle.setMaximum(360);
-        sliderAngle.setIncrement(5);
+        Label labelAngle = new Label(this, SWT.NONE);
+        labelAngle.setLayoutData(new GridData(SWT.FILL, SWT.NONE, false, false, 4, 1));
+        labelAngle.setText("Поворот треугольника:");
 
         textCurrentAngle = new Text(this, SWT.BORDER);
+        textCurrentAngle.setLayoutData(new GridData(27, 20));
         textCurrentAngle.setText("0");
 
-//        sliderAngle.addSelectionListener(new SelectionAdapter() {
-//            public void widgetSelected(SelectionEvent e) {
-//                textCurrentAngle.setText(new Integer(sliderAngle.getSelection()).toString());
-//            }
-//        });
+        sliderAngle = new SliderAngle(this, SWT.HORIZONTAL);
+//        sliderAngle.setLayoutData(new GridData(SWT.NONE, SWT.NONE, false, false, 1, 1));
+        sliderAngle.setSize(60, 20);
+        sliderAngle.setMinimum(0);
+        sliderAngle.setMaximum(370); //For some reason it takes 10 off maximum:c
+        sliderAngle.setIncrement(5);
+        sliderAngle.setSelection(0);
 
-        sliderY = new SliderY(this, SWT.VERTICAL);
-//        final Slider sliderY = new Slider(this, SWT.VERTICAL);
-        sliderY.setSize(20, 80);
-        sliderY.setMinimum(100);
-        sliderY.setMaximum(1000);
-        sliderY.setIncrement(10);
+        Label labelY = new Label(this, SWT.NONE);
+        labelY.setLayoutData(new GridData(SWT.FILL, SWT.NONE, false, false, 2, 1));
+        labelY.setText("Y:");
 
         canvas = new Canvas(this, SWT.FILL);
         canvas.setLayoutData(new GridData(SWT.FILL, SWT.FILL,
-                true, true, 4, 2));
+                true, true, 4, 3));
         canvas.setBackground(backgroundColor);
 
         textCurrentY = new Text(this, SWT.BORDER);
-        textCurrentY.setLayoutData(new GridData(GridData.VERTICAL_ALIGN_BEGINNING));
-        textCurrentY.setText("0");
+//        textCurrentY.setLayoutData(new GridData(GridData.VERTICAL_ALIGN_BEGINNING));
+        GridData dataTextY = new GridData(SWT.NONE, SWT.NONE, false, false, 2, 1);
+        dataTextY.widthHint = 27;
+        dataTextY.heightHint = 20;
+        textCurrentY.setLayoutData(dataTextY);
+        textCurrentY.setText("400");
 
-//        sliderY.addSelectionListener(new SelectionAdapter() {
-//            public void widgetSelected(SelectionEvent e) {
-//                textCurrentY.setText(new Integer(sliderY.getSelection()).toString());
-//            }
-//        });
+        sliderY = new SliderY(this, SWT.VERTICAL);
+//        sliderY.setLayoutData(new GridData(SWT.NONE, SWT.FILL, false, false, 2, 1));
+//        sliderY.setSize(20, 80);
+        GridData dataSliderY = new GridData(SWT.NONE, SWT.FILL, false, false, 2, 1);
+        dataSliderY.widthHint = 41;
+        sliderY.setLayoutData(dataSliderY);
+        sliderY.setMinimum(50);
+        sliderY.setMaximum(760);
+        sliderY.setIncrement(10);
+        sliderY.setSelection(400);
     }
 
     public void show() {
         sliderX.assignSelectionListener(textCurrentX, sliderY, drawManager);
         sliderY.assignSelectionListener(textCurrentY, sliderX, drawManager);
         sliderAngle.assignSelectionListener(sliderX, sliderY, textCurrentAngle, model, drawManager);
-        drawManager.initiate();
         open();
+        drawManager.initiate();
     }
 
     public void assignModel(Lab1Model model) {
@@ -111,6 +117,6 @@ public class Window extends Shell {
     @Override
     protected void checkSubclass() {
         //  allow subclass
-        System.out.println("info   : checking menu subclass");
+//        System.out.println("info   : checking menu subclass");
     }
 }

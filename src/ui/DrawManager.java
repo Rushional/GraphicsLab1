@@ -13,9 +13,10 @@ public class DrawManager {
         this.model = model;
     }
 
-    public void updateTriangle() {
+    public void updateTriangle(Point point) {
         drawer.clear();
         drawer.drawPolygon(model.getCurrentTriangle());
+        drawer.drawPoint(point);
     }
 
     public void movePoint(Point point) {
@@ -27,5 +28,6 @@ public class DrawManager {
     public void initiate() {
         drawer.drawCoordinatesGrid();
         drawer.drawPolygon(model.getDefaultTriangle());
+        drawer.drawPoint(new Point(600, 400));
     }
 }

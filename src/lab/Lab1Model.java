@@ -4,7 +4,7 @@ import org.eclipse.swt.graphics.Point;
 import Jama.Matrix;
 
 public class Lab1Model {
-	private static Matrix defaultTriangle = new Matrix(new double[][] {{600.0, 400.0, 1.0},{600.0, 300.0, 1.0},{700.0, 400.0, 1.0}});
+	private static Matrix defaultTriangle = new Matrix(new double[][] {{750.0, 250.0, 1.0},{850.0, 250.0, 1.0},{850.0, 150.0, 1.0}});
 	private Matrix currentTriangle;
 	
 	public Matrix getDefaultTriangle(){

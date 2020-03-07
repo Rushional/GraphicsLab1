@@ -26,8 +26,9 @@ public class SliderAngle extends Slider {
             @Override
             public void widgetSelected(SelectionEvent e) {
                 textCurrentAngle.setText(new Integer(getSelection()).toString());
-                model.changeTriangle(new Point(sliderX.getX(), sliderY.getY()), getSelection());
-                manager.updateTriangle();
+                Point point = new Point(sliderX.getX(), sliderY.getY());
+                model.changeTriangle(point, getSelection());
+                manager.updateTriangle(point);
             }
         });
     }
@@ -35,6 +36,6 @@ public class SliderAngle extends Slider {
     @Override
     protected void checkSubclass() {
         //  allow subclass
-        System.out.println("info   : checking menu subclass");
+//        System.out.println("info   : checking menu subclass");
     }
 }

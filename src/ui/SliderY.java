@@ -32,6 +32,6 @@ public class SliderY extends Slider {
     @Override
     protected void checkSubclass() {
         //  allow subclass
-        System.out.println("info   : checking menu subclass");
+//        System.out.println("info   : checking menu subclass");
     }
 }

@@ -8,10 +8,10 @@ import ui.Window;
 public class Main {
     public static void main(String[] args) {
         Display display = Display.getDefault();
-        Window window = new Window(display/*, drawer, lab1*/);
+        Window window = new Window(display);
         window.build();
-        GC gc = new GC(window.getCanvas());
-        Drawer drawer = new Drawer(window, gc);
+//        GC gc = new GC(window.getCanvas());
+        Drawer drawer = new Drawer(window, new GC(window.getCanvas()));
         Lab1Model lab1Model = new Lab1Model();
         window.assignModel(lab1Model);
         DrawManager drawManager = new DrawManager(drawer, lab1Model);
