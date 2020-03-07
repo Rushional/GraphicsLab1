@@ -1,24 +1,22 @@
-import lab.Lab1;
+import lab.Lab1Model;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.widgets.Display;
-import test.TestingSlider;
-import ui.AngleRequestDialog;
+import ui.DrawManager;
 import ui.Drawer;
 import ui.Window;
 
 public class Main {
     public static void main(String[] args) {
-        TestingSlider sliderTest = new TestingSlider();
         Display display = Display.getDefault();
         Window window = new Window(display/*, drawer, lab1*/);
-//        AngleRequestDialog angleDialog = new AngleRequestDialog(window);
-//        System.out.println(angleDialog.requestDouble());
-        window.open();
+        window.build();
         GC gc = new GC(window.getCanvas());
         Drawer drawer = new Drawer(window, gc);
-        Lab1 lab1 = new Lab1();
-        drawer.drawCoordinatesGrid();
-        drawer.drawPolygon(lab1.getDefaultTriangle()/*, gc*/);
+        Lab1Model lab1Model = new Lab1Model();
+        window.assignModel(lab1Model);
+        DrawManager drawManager = new DrawManager(drawer, lab1Model);
+        window.assignDrawManager(drawManager);
+        window.show();
         while (!window.isDisposed()) {
             if (!display.readAndDispatch())
                 display.sleep();

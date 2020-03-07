@@ -1,16 +1,16 @@
 package ui;
 
-import lab.Lab1;
+import lab.Lab1Model;
 import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.events.PaintListener;
 
 public class WindowPaintListener implements PaintListener {
     private Drawer drawer;
-    private Lab1 lab1;
+    private Lab1Model lab1Model;
 
-    public WindowPaintListener(Drawer drawer, Lab1 lab1) {
+    public WindowPaintListener(Drawer drawer, Lab1Model lab1Model) {
         this.drawer = drawer;
-        this.lab1 = lab1;
+        this.lab1Model = lab1Model;
     }
 //    PaintListener listens for PaintEvent,
 //    This means paintControl is called after every PaintEvent

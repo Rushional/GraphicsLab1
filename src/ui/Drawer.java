@@ -1,9 +1,7 @@
 package ui;
 
 import Jama.Matrix;
-import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.graphics.GC;
-import org.eclipse.swt.graphics.RGB;
+import org.eclipse.swt.graphics.*;
 
 public class Drawer {
     private Window window;
@@ -92,27 +90,41 @@ public class Drawer {
         }
     }
 
+    public void drawPoint(Point point){
+        gc.drawPoint(point.x, point.y);
+        gc.drawOval(point.x -2, point.y -2, 4, 4);
+    }
+
     public void drawCoordinatesGrid(){
         int step = 50;
         int sizeX = window.getSize().x;
         int sizeY = window.getSize().y;
-        int colorRGB = 180;
-        int i = 0;
-        for (i = 0; i < sizeX; i+= step){
-            gc.drawText(((Integer)i).toString(), i, 0); //integer - строка перевода в разные типы
+        int i;
+        int displacement = 0; //shift this many displacement pixels lower and to the right
+        for (i = displacement; i < sizeX; i+= step){
+            gc.drawText(((Integer)(i - displacement)).toString(), i, displacement); //integer - строка перевода в разные типы
         }
-        for (i = 0; i < window.getSize().y; i+= step){
-            gc.drawText(((Integer)i).toString(), 0, i); //integer - строка перевода в разные типы
+        for (i = displacement; i < window.getSize().y; i+= step){
+            gc.drawText(((Integer)(i - displacement)).toString(), displacement, i); //integer - строка перевода в разные типы
         }
         //gray
         Color foregroundOld = gc.getForeground();
-        gc.setForeground(new Color(window.getDisplay(), new RGB(colorRGB,colorRGB,colorRGB)));
-        for (i = 0; i < sizeX; i+= step){
-            gc.drawLine(i, 0, i, sizeY);
+//        java.awt.Color color = new java.awt.Color(142, 145, 180); //I used this to comfortably choose color in idea
+        gc.setForeground(new Color(window.getDisplay(), new RGB(142, 145, 180)));
+        for (i = displacement; i < sizeX; i+= step){
+            gc.drawLine(i, displacement, i, sizeY);
         }
-        for (i = 0; i < window.getSize().y; i+= step){
-            gc.drawLine(0, i, sizeX, i);
+        for (i = displacement; i < window.getSize().y; i+= step){
+            gc.drawLine(displacement, i, sizeX, i);
         }
         gc.setForeground(foregroundOld);
+    }
+
+    public void clear() {
+        Color foregroundOld = gc.getForeground();
+        gc.setForeground(gc.getBackground());
+        gc.fillRectangle(0, 0, 6000, 6000);
+        gc.setForeground(foregroundOld);
+        drawCoordinatesGrid();
     }
 }
