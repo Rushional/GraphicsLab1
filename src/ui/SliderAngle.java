@@ -1,6 +1,6 @@
 package ui;
 
-import lab.Lab1Model;
+import model.Lab1Model;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Point;

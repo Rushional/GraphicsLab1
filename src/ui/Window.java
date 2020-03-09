@@ -1,6 +1,6 @@
 package ui;
 
-import lab.Lab1Model;
+import model.Lab1Model;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.RGB;
@@ -26,7 +26,9 @@ public class Window extends Shell {
     }
 
     public void build() {
-        Color backgroundColor = new Color(getDisplay(), new RGB(173, 196, 228));
+//        Color backgroundColor = new Color(getDisplay(), new RGB(173, 196, 228)); // Blue background
+        Color backgroundColor = new Color(getDisplay(), new RGB(255, 255, 255)); // Plain white
+        Color textBoxColor = new Color(getDisplay(), new RGB(0, 0 ,0)); //Plain black
         setLayout(new GridLayout(6, false));
 
         Label labelX = new Label(this, SWT.NONE);
@@ -40,6 +42,7 @@ public class Window extends Shell {
         dataTextX.heightHint = 20;
         textCurrentX.setLayoutData(dataTextX);
         textCurrentX.setText("600");
+        textCurrentX.setEnabled(false);
 
         sliderX = new SliderX(this, SWT.HORIZONTAL);
         sliderX.setLayoutData(new GridData(SWT.FILL, SWT.NONE, false, false, 3, 1));
@@ -56,6 +59,7 @@ public class Window extends Shell {
         textCurrentAngle = new Text(this, SWT.BORDER);
         textCurrentAngle.setLayoutData(new GridData(27, 20));
         textCurrentAngle.setText("0");
+        textCurrentAngle.setEnabled(false);
 
         sliderAngle = new SliderAngle(this, SWT.HORIZONTAL);
 //        sliderAngle.setLayoutData(new GridData(SWT.NONE, SWT.NONE, false, false, 1, 1));
@@ -81,6 +85,7 @@ public class Window extends Shell {
         dataTextY.heightHint = 20;
         textCurrentY.setLayoutData(dataTextY);
         textCurrentY.setText("400");
+        textCurrentY.setEnabled(false);
 
         sliderY = new SliderY(this, SWT.VERTICAL);
 //        sliderY.setLayoutData(new GridData(SWT.NONE, SWT.FILL, false, false, 2, 1));

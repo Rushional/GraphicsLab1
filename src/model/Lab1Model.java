@@ -1,4 +1,4 @@
-package lab;
+package model;
 
 import org.eclipse.swt.graphics.Point;
 import Jama.Matrix;

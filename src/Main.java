@@ -1,4 +1,4 @@
-import lab.Lab1Model;
+import model.Lab1Model;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.widgets.Display;
 import ui.DrawManager;
