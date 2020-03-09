@@ -10,18 +10,13 @@ import org.eclipse.swt.widgets.Text;
 
 
 public class SliderAngle extends Slider {
-//    private SliderX sliderX;
-//    private SliderY sliderY;
-//    private Text textCurrentAngle;
-//    private Lab1Model model;
-//    private DrawManager drawManager;
 
-    public SliderAngle(Composite window, int style) {
+    SliderAngle(Composite window, int style) {
         super(window, style);
     }
 
-    public void assignSelectionListener(SliderX sliderX, SliderY sliderY,
-                                        Text textCurrentAngle, Lab1Model model, DrawManager manager) {
+    void assignSelectionListener(SliderX sliderX, SliderY sliderY,
+                                 Text textCurrentAngle, Lab1Model model, DrawManager manager) {
         addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {

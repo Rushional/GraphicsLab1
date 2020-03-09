@@ -17,7 +17,7 @@ public class Drawer {
      *|x1 y1 ...|  (точка 1)
      *|x2 y2 ...|  (точка 2)
      */
-    public void drawPolygon(Matrix m){
+    void drawPolygon(Matrix m){
         if (m == null || m.getColumnDimension() < 2){
             System.out.println("Wrong matrix when drawing the polygon");
             return;
@@ -90,12 +90,12 @@ public class Drawer {
         }
     }
 
-    public void drawPoint(Point point){
+    void drawPoint(Point point){
         gc.drawPoint(point.x, point.y);
         gc.drawOval(point.x -2, point.y -2, 4, 4);
     }
 
-    public void drawCoordinatesGrid(){
+    void drawCoordinatesGrid(){
         int step = 50;
         int sizeX = window.getSize().x;
         int sizeY = window.getSize().y;
@@ -120,7 +120,7 @@ public class Drawer {
         gc.setForeground(foregroundOld);
     }
 
-    public void clear() {
+    void clear() {
         Color foregroundOld = gc.getForeground();
         gc.setForeground(gc.getBackground());
         gc.fillRectangle(0, 0, 6000, 6000);

@@ -10,18 +10,6 @@ public class Lab1Model {
 	public Matrix getDefaultTriangle(){
 		return defaultTriangle;
 	}
-
-	public void moveHorizontally() {
-
-	}
-
-	public void moveVertically() {
-
-	}
-
-	public void rotate() {
-
-	}
 	
 	public void changeTriangle(Point point, double angle){
 		Matrix changeSK = new Matrix(new double[][] {{1.0, 0.0, 0.0},{0.0, 1.0, 0.0},{-point.x, -point.y, 1.0}});

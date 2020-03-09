@@ -10,11 +10,11 @@ import org.eclipse.swt.widgets.Text;
 public class SliderY extends Slider {
     private int y = 400;
 
-    public SliderY(Composite window, int style) {
+    SliderY(Composite window, int style) {
         super(window, style);
     }
 
-    public void assignSelectionListener(Text textCurrentY, SliderX sliderX, DrawManager manager) {
+    void assignSelectionListener(Text textCurrentY, SliderX sliderX, DrawManager manager) {
         addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
@@ -25,7 +25,7 @@ public class SliderY extends Slider {
         });
     }
 
-    public int getY() {
+    int getY() {
         return y;
     }
 
