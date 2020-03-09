@@ -26,8 +26,8 @@ public class Window extends Shell {
     }
 
     public void build() {
-//        Color backgroundColor = new Color(getDisplay(), new RGB(173, 196, 228)); // Blue background
-        Color backgroundColor = new Color(getDisplay(), new RGB(255, 255, 255)); // Plain white
+        Color backgroundColor = new Color(getDisplay(), new RGB(173, 196, 228)); // Blue background
+//        Color backgroundColor = new Color(getDisplay(), new RGB(255, 255, 255)); // Plain white
         Color textBoxColor = new Color(getDisplay(), new RGB(0, 0 ,0)); //Plain black
         setLayout(new GridLayout(6, false));
 
