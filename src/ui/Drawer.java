@@ -127,4 +127,23 @@ public class Drawer {
         gc.setForeground(foregroundOld);
         drawCoordinatesGrid();
     }
+
+    void drawDefaultTriangle(Matrix m) {
+        Color foregroundOld = gc.getForeground();
+//                java.awt.Color color = new java.awt.Color(0, 128, 0); //I used this to comfortably choose color in idea
+        gc.setForeground(new Color(window.getDisplay(), new RGB(0, 90, 0)));
+        drawPolygon(m);
+        gc.setForeground(foregroundOld);
+    }
+
+    void drawPreviousTriangle(Matrix m) {
+        Color foregroundOld = gc.getForeground();
+        gc.setForeground(new Color(window.getDisplay(), new RGB(72, 61, 139)));
+        drawPolygon(m);
+        gc.setForeground(foregroundOld);
+    }
+
+    void drawCurrentTriangle(Matrix m) {
+        drawPolygon(m);
+    }
 }

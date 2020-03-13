@@ -8,13 +8,15 @@ public class Lab1Model {
 			{750.0, 250.0, 1.0},
 			{850.0, 250.0, 1.0},
 			{850.0, 150.0, 1.0}});
-	private Matrix currentTriangle;
+	private Matrix currentTriangle = defaultTriangle;
+	private Matrix previousTriangle;
 	
 	public Matrix getDefaultTriangle(){
 		return defaultTriangle;
 	}
 	
 	public void changeTriangle(Point point, double angle){
+		previousTriangle = currentTriangle;
 		Matrix changeSK = new Matrix(new double[][] {
 				{1.0, 0.0, 0.0},
 				{0.0, 1.0, 0.0},
@@ -36,5 +38,9 @@ public class Lab1Model {
 
 	public Matrix getCurrentTriangle() {
 		return currentTriangle;
+	}
+
+	public Matrix getPreviousTriangle() {
+		return previousTriangle;
 	}
 }

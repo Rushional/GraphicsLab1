@@ -20,6 +20,7 @@ public class Window extends Shell {
     private TextAngle textCurrentAngle;
     private TextX textCurrentX;
     private TextY textCurrentY;
+    private Label labelPreviousAngle;
 
     public Window(Display display, Lab1Model model) {
         super(display, SWT.SHELL_TRIM);
@@ -32,7 +33,7 @@ public class Window extends Shell {
         Color backgroundColor = new Color(getDisplay(), new RGB(173, 196, 228)); // Blue background
 //        Color backgroundColor = new Color(getDisplay(), new RGB(255, 255, 255)); // Plain white
         Color textBoxColor = new Color(getDisplay(), new RGB(0, 0 ,0)); //Plain black
-        setLayout(new GridLayout(6, false));
+        setLayout(new GridLayout(7, false));
 
         Label labelX = new Label(this, SWT.NONE);
         labelX.setText("X:");
@@ -47,7 +48,7 @@ public class Window extends Shell {
         textCurrentX.setText("600");
 
         sliderX = new SliderX(this, SWT.HORIZONTAL);
-        sliderX.setLayoutData(new GridData(SWT.FILL, SWT.NONE, false, false, 3, 1));
+        sliderX.setLayoutData(new GridData(SWT.FILL, SWT.NONE, false, false, 4, 1));
         sliderX.setSize(80, 20);
         sliderX.setMinimum(50);
         sliderX.setMaximum(1200);
@@ -65,10 +66,19 @@ public class Window extends Shell {
         sliderAngle = new SliderAngle(this, SWT.HORIZONTAL, model);
 //        sliderAngle.setLayoutData(new GridData(SWT.NONE, SWT.NONE, false, false, 1, 1));
         sliderAngle.setSize(60, 20);
+//        GridData dataSliderAngle = new GridData(SWT.NONE, SWT.NONE, false, false, 2, 1);
+//        dataSliderAngle.widthHint = 60;
         sliderAngle.setMinimum(0);
         sliderAngle.setMaximum(370); //For some reason it takes 10 off maximum:c
         sliderAngle.setIncrement(5);
         sliderAngle.setSelection(0);
+
+        labelPreviousAngle = new Label(this, SWT.NONE);
+        GridData dataLabelAngle = new GridData(SWT.NONE, SWT.NONE, false, false, 1, 1);
+        dataLabelAngle.widthHint = 155;
+        labelPreviousAngle.setLayoutData(dataLabelAngle);
+        labelPreviousAngle.setForeground(new Color(getDisplay(), 142, 145, 180));
+        labelPreviousAngle.setText("Предыдущий угол: 0");
 
         Label labelY = new Label(this, SWT.NONE);
         labelY.setLayoutData(new GridData(SWT.FILL, SWT.NONE, false, false, 2, 1));
@@ -76,7 +86,7 @@ public class Window extends Shell {
 
         canvas = new Canvas(this, SWT.FILL);
         canvas.setLayoutData(new GridData(SWT.FILL, SWT.FILL,
-                true, true, 4, 3));
+                true, true, 5, 3));
         canvas.setBackground(backgroundColor);
 
         textCurrentY = new TextY(this, SWT.BORDER);
@@ -88,8 +98,6 @@ public class Window extends Shell {
         textCurrentY.setText("400");
 
         sliderY = new SliderY(this, SWT.VERTICAL);
-//        sliderY.setLayoutData(new GridData(SWT.NONE, SWT.FILL, false, false, 2, 1));
-//        sliderY.setSize(20, 80);
         GridData dataSliderY = new GridData(SWT.NONE, SWT.FILL, false, false, 2, 1);
         dataSliderY.widthHint = 41;
         sliderY.setLayoutData(dataSliderY);
@@ -103,16 +111,12 @@ public class Window extends Shell {
         sliderX.assignSelectionListener(textCurrentX, sliderY, drawManager);
         sliderY.assignSelectionListener(textCurrentY, sliderX, drawManager);
         sliderAngle.assignSelectionListener(sliderX, sliderY, textCurrentAngle, drawManager);
-        sliderAngle.assignFields(sliderX, sliderY);
+        sliderAngle.assignFields(sliderX, sliderY, labelPreviousAngle);
         textCurrentX.assignListener(sliderX, drawManager);
         textCurrentY.assignListener(sliderY, drawManager);
         textCurrentAngle.assignListener(sliderAngle, drawManager);
         open();
         drawManager.initiate();
-    }
-
-    public void assignModel(Lab1Model model) {
-        this.model = model;
     }
 
     public void assignDrawManager(DrawManager drawManager) {

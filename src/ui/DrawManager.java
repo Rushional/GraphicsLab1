@@ -19,8 +19,10 @@ public class DrawManager {
 
     void updateTriangle() {
         drawer.clear();
-        drawer.drawPolygon(model.getCurrentTriangle());
         drawer.drawPoint(new Point(sliderX.getX(), sliderY.getY()));
+        drawer.drawDefaultTriangle(model.getDefaultTriangle());
+        drawer.drawPreviousTriangle(model.getPreviousTriangle());
+        drawer.drawCurrentTriangle(model.getCurrentTriangle());
     }
 
     void movePoint() {
