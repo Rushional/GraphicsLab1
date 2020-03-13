@@ -2,7 +2,6 @@ package ui;
 
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Slider;
 import org.eclipse.swt.widgets.Text;
@@ -18,15 +17,22 @@ public class SliderX extends Slider {
         addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
-                textCurrentX.setText(new Integer(getSelection()).toString());
+                textCurrentX.setText(Integer.toString(getSelection()));
                 x = getSelection();
-                manager.movePoint(new Point(getSelection(), sliderY.getY()));
+                manager.movePoint();
             }
         });
     }
 
     int getX() {
         return x;
+    }
+
+    void setX(int x) {
+        if (x < 50) x = 50;
+        else if (x > 1200) x = 1200;
+        this.x = x;
+        setSelection(x);
     }
 
     @Override

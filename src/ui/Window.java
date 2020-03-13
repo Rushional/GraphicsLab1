@@ -17,12 +17,15 @@ public class Window extends Shell {
     private SliderX sliderX;
     private SliderY sliderY;
     private SliderAngle sliderAngle;
-    private Text textCurrentX, textCurrentY, textCurrentAngle;
+    private TextAngle textCurrentAngle;
+    private TextX textCurrentX;
+    private TextY textCurrentY;
 
-    public Window(Display display) {
+    public Window(Display display, Lab1Model model) {
         super(display, SWT.SHELL_TRIM);
         setText("Лабораторная работа 1");
         setSize(1300, 900);
+        this.model = model;
     }
 
     public void build() {
@@ -34,7 +37,7 @@ public class Window extends Shell {
         Label labelX = new Label(this, SWT.NONE);
         labelX.setText("X:");
 
-        textCurrentX = new Text(this, SWT.BORDER);
+        textCurrentX = new TextX(this, SWT.BORDER);
 //        textCurrentX.setLayoutData(new GridData(SWT.NONE, SWT.NONE, false, false, 2, 1));
 //        textCurrentX.setLayoutData(new GridData(27, 20));
         GridData dataTextX = new GridData(SWT.NONE, SWT.NONE, false, false, 2, 1);
@@ -42,7 +45,6 @@ public class Window extends Shell {
         dataTextX.heightHint = 20;
         textCurrentX.setLayoutData(dataTextX);
         textCurrentX.setText("600");
-        textCurrentX.setEnabled(false);
 
         sliderX = new SliderX(this, SWT.HORIZONTAL);
         sliderX.setLayoutData(new GridData(SWT.FILL, SWT.NONE, false, false, 3, 1));
@@ -56,12 +58,11 @@ public class Window extends Shell {
         labelAngle.setLayoutData(new GridData(SWT.FILL, SWT.NONE, false, false, 4, 1));
         labelAngle.setText("Поворот треугольника:");
 
-        textCurrentAngle = new Text(this, SWT.BORDER);
+        textCurrentAngle = new TextAngle(this, SWT.BORDER);
         textCurrentAngle.setLayoutData(new GridData(27, 20));
         textCurrentAngle.setText("0");
-        textCurrentAngle.setEnabled(false);
 
-        sliderAngle = new SliderAngle(this, SWT.HORIZONTAL);
+        sliderAngle = new SliderAngle(this, SWT.HORIZONTAL, model);
 //        sliderAngle.setLayoutData(new GridData(SWT.NONE, SWT.NONE, false, false, 1, 1));
         sliderAngle.setSize(60, 20);
         sliderAngle.setMinimum(0);
@@ -78,14 +79,13 @@ public class Window extends Shell {
                 true, true, 4, 3));
         canvas.setBackground(backgroundColor);
 
-        textCurrentY = new Text(this, SWT.BORDER);
+        textCurrentY = new TextY(this, SWT.BORDER);
 //        textCurrentY.setLayoutData(new GridData(GridData.VERTICAL_ALIGN_BEGINNING));
         GridData dataTextY = new GridData(SWT.NONE, SWT.NONE, false, false, 2, 1);
         dataTextY.widthHint = 27;
         dataTextY.heightHint = 20;
         textCurrentY.setLayoutData(dataTextY);
         textCurrentY.setText("400");
-        textCurrentY.setEnabled(false);
 
         sliderY = new SliderY(this, SWT.VERTICAL);
 //        sliderY.setLayoutData(new GridData(SWT.NONE, SWT.FILL, false, false, 2, 1));
@@ -102,7 +102,11 @@ public class Window extends Shell {
     public void show() {
         sliderX.assignSelectionListener(textCurrentX, sliderY, drawManager);
         sliderY.assignSelectionListener(textCurrentY, sliderX, drawManager);
-        sliderAngle.assignSelectionListener(sliderX, sliderY, textCurrentAngle, model, drawManager);
+        sliderAngle.assignSelectionListener(sliderX, sliderY, textCurrentAngle, drawManager);
+        sliderAngle.assignFields(sliderX, sliderY);
+        textCurrentX.assignListener(sliderX, drawManager);
+        textCurrentY.assignListener(sliderY, drawManager);
+        textCurrentAngle.assignListener(sliderAngle, drawManager);
         open();
         drawManager.initiate();
     }
@@ -117,6 +121,14 @@ public class Window extends Shell {
 
     public Composite getCanvas() {
         return canvas;
+    }
+
+    public SliderX getSliderX() {
+        return sliderX;
+    }
+
+    public SliderY getSliderY() {
+        return sliderY;
     }
 
     @Override

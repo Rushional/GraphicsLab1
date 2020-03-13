@@ -7,14 +7,12 @@ import ui.Window;
 
 public class Main {
     public static void main(String[] args) {
-        Display display = Display.getDefault();
-        Window window = new Window(display);
-        window.build();
-//        GC gc = new GC(window.getCanvas());
-        Drawer drawer = new Drawer(window, new GC(window.getCanvas()));
         Lab1Model lab1Model = new Lab1Model();
-        window.assignModel(lab1Model);
-        DrawManager drawManager = new DrawManager(drawer, lab1Model);
+        Display display = Display.getDefault();
+        Window window = new Window(display, lab1Model);
+        window.build();
+        Drawer drawer = new Drawer(window, new GC(window.getCanvas()));
+        DrawManager drawManager = new DrawManager(drawer, lab1Model, window.getSliderX(), window.getSliderY());
         window.assignDrawManager(drawManager);
         window.show();
         while (!window.isDisposed()) {

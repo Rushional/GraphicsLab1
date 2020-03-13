@@ -18,15 +18,22 @@ public class SliderY extends Slider {
         addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent e) {
-                textCurrentY.setText(new Integer(getSelection()).toString());
+                textCurrentY.setText(Integer.toString(getSelection()));
                 y = getSelection();
-                manager.movePoint(new Point(sliderX.getX(), getSelection()));
+                manager.movePoint();
             }
         });
     }
 
     int getY() {
         return y;
+    }
+
+    void setY(int y) {
+        if (y < 50) y = 50;
+        else if (y > 760) y = 760;
+        this.y = y;
+        setSelection(y);
     }
 
     @Override

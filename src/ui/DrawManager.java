@@ -7,21 +7,26 @@ import org.eclipse.swt.graphics.Point;
 public class DrawManager {
     private Drawer drawer;
     private Lab1Model model;
+    private SliderX sliderX;
+    private SliderY sliderY;
 
-    public DrawManager(Drawer drawer, Lab1Model model) {
+    public DrawManager(Drawer drawer, Lab1Model model, SliderX sliderX, SliderY sliderY) {
         this.drawer = drawer;
         this.model = model;
+        this.sliderX = sliderX;
+        this.sliderY = sliderY;
     }
 
-    void updateTriangle(Point point) {
+    void updateTriangle() {
         drawer.clear();
         drawer.drawPolygon(model.getCurrentTriangle());
-        drawer.drawPoint(point);
+        drawer.drawPoint(new Point(sliderX.getX(), sliderY.getY()));
     }
 
-    void movePoint(Point point) {
+    void movePoint() {
         drawer.clear();
         drawer.drawPolygon(model.getDefaultTriangle());
+        Point point = new Point(sliderX.getX(), sliderY.getY());
         drawer.drawPoint(point);
     }
 
